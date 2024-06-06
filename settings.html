@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings and Configuration - Predictive Maintenance Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            /* background-color: #333; */
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        nav {
+            background-color: #444;
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        h1, h2 {
+            color: #333;
+            margin: 0;
+        }
+
+        .settings {
+            margin-top: 2rem;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .settings-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+            position:relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Settings and Configuration</h1>
+    </header>
+    <nav>
+        <a href="main-dashboard.html">Dashboard</a>
+        <a href="machine-detail.html">Machine Detail</a>
+        <a href="analytics-reports.html">Analytics & Reports</a>
+        <a href="settings.html">Settings</a>
+    </nav>
+    <main>
+        <div class="settings">
+            <h2>System Settings</h2>
+            <h3>Schedule Future Maintenance</h3>
+            <div class="settings-group">
+                <label for="alert-threshold">Alert Level</label>
+                <input type="number" id="alert-threshold" name="alert-threshold" min="1" max="100" value="10">
+            </div>
+            <div class="settings-group">
+                <label for="maintenance-interval">Maintenance Interval (days)</label>
+                <input type="number" id="maintenance-interval" name="maintenance-interval" min="1" max="365" value="30">
+            </div>
+            <div class="settings-group">
+                <label for="notification-method">Notification Method</label>
+                <select id="notification-method" name="notification-method">
+                    <option value="email">Email</option>
+                    <option value="sms">SMS</option>
+                    <option value="push">Push Notification</option>
+                </select>
+            </div>
+            <button type="button">Save Settings</button>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Predictive Maintenance Dashboard</p>
+    </footer>
+    <script>
+        function saveSettings() {
+            // Function to save settings
+            const alertThreshold = document.getElementById('alert-threshold').value;
+            const maintenanceInterval = document.getElementById('maintenance-interval').value;
+            const notificationMethod = document.getElementById('notification-method').value;
+
+            // Save these values as needed, e.g., local storage, or send to a backend server
+            console.log('Settings saved:', {
+                alertThreshold,
+                maintenanceInterval,
+                notificationMethod
+            });
+
+            alert('Settings saved successfully!');
+        }
+    </script>
+</body>
+</html>

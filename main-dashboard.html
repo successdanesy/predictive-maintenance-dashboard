@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Maintenance Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            /* background-color: #333; */
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        nav {
+            background-color: #444;
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        h1, h2 {
+            color: #333;
+            margin: 0;
+        }
+
+        .overview-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            text-align: center;
+            width: 30%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            color: red;
+        }
+
+        .ok {
+            color: green;
+        }
+
+        .predictive-analytics, .alerts-notifications, .maintenance-history {
+            margin-top: 2rem;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #chart-container {
+            max-width: 100%;
+            max-height: 400px;
+        }
+
+        #maintenance-chart {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Predictive Maintenance Dashboard</h1>
+    </header>
+    <nav>
+        <a href="main-dashboard.html">Dashboard</a>
+        <a href="machine-detail.html">Machine Detail</a>
+        <a href="analytics-reports.html">Analytics & Reports</a>
+        <a href="settings.html">Settings</a>
+    </nav>
+    <main>
+        <div class="overview-cards"> 
+            <div class="card">
+                <h2>Machine 1</h2>
+                <h3>Plasma Cutting Machine</h3>
+                <p>Status: <span class="ok">OK, No Anomalies Detected</span></p>
+                <p>Status: <span class="ok">Temperature: 75°C</span></p>
+                <p>Vibration: 0.02g</p>
+                <p>Next Maintenance: <span id="maintenance-date-1">12/06/2024</span></p>
+            </div>
+            <div class="card">
+                <h2>Machine 2</h2>
+                <h3>WaterJet Cutting Machine</h3>
+                <p>Status: <span class="alert">Anomaly Detected, Maintenance Needed</span></p>
+                <p>Status: <span class="alert">Temperature: 90°C</span></p>
+                <p>Vibration: 0.08g</p>
+                <p>Next Maintenance: <span id="maintenance-date-2">05/20/2024</span></p>
+            </div>
+        </div>
+        <div class="predictive-analytics">
+            <h2>Predictive Analytics</h2>
+            <p>Predict Your Next Service Date</p>
+            <div id="chart-container">
+                <canvas id="maintenance-chart"></canvas>
+            </div>
+        </div>
+        <div class="alerts-notifications">
+            <h2>Alerts</h2>
+            <ul id="alert-list">
+                <li><span class="alert">Check Temperature Sensor In Machine 2</span></li>
+                <li><span class="alert">Machine 2 failed to start</span></li>
+                <!-- Additional alerts -->
+            </ul>
+        </div>
+        <div class="maintenance-history">
+            <h2>Maintenance History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Machine</th>
+                        <th>Date</th>
+                        <th>Maintenance Performed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Machine 1</td>
+                        <td>01/01/2024</td>
+                        <td><span class="ok">Replaced motor</span></td>
+                    </tr>
+                    <tr>
+                        <td>Machine 2</td>
+                        <td>02/15/2024</td>
+                        <td><span class="ok">Lubricated bearings</span></td>
+                    </tr>
+                    <!-- Additional historical data -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Predictive Maintenance Dashboard</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Sample data for predictive analytics
+            const maintenanceDates = {
+                "machine1": "12/06/2024",
+                "machine2": "05/20/2024"
+            };
+
+            const alerts = [
+                "Schedule Maintenance Immediately."
+            ];
+
+            // Update maintenance dates
+            for (let machine in maintenanceDates) {
+                document.getElementById(`maintenance-date-${machine.replace('machine', '')}`).textContent = maintenanceDates[machine];
+            }
+
+            // Populate alerts
+            const alertList = document.getElementById('alert-list');
+            alerts.forEach(alert => {
+                const li = document.createElement('li');
+                li.textContent = alert;
+                alertList.appendChild(li);
+            });
+
+            // Initialize chart (using Chart.js for example)
+            const ctx = document.getElementById('maintenance-chart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                    datasets: [{
+                        label: 'Maintenance Needs',
+                        data: [3, 2, 2, 1, 5, 3],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

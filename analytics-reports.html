@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics and Reports - Predictive Maintenance Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            /* background-color: #333; */
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        nav {
+            background-color: #444;
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        h1, h2 {
+            color: #333;
+            margin: 0;
+        }
+
+        .reports, .analytics {
+            margin-top: 2rem;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-item {
+            margin-bottom: 1rem;
+        }
+
+        #analytics-chart-container {
+            height: 300px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+            position:relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Analytics and Reports Simulation</h1>
+    </header>
+    <nav>
+        <a href="main-dashboard.html">Dashboard</a>
+        <a href="machine-detail.html">Machine Detail</a>
+        <a href="analytics-reports.html">Analytics & Reports</a>
+        <a href="settings.html">Settings</a>
+    </nav>
+    <main>
+        <div class="reports">
+            <h2>Maintenance Reports</h2>
+            <div class="report-item">
+                <h3>Machine 1 - January Report</h3>
+                <p>Temperature: 70-75°C</p>
+                <p>Vibration: 0.02-0.03g</p>
+                <p>Maintenance: Motor replaced</p>
+            </div>
+            <div class="report-item">
+                <h3>Machine 2 - January Report</h3>
+                <p>Temperature: 85-90°C</p>
+                <p>Vibration: 0.07-0.08g</p>
+                <p>Maintenance: Bearings lubricated</p>
+            </div>
+        </div>
+        <div class="analytics">
+            <h2>Analytics</h2>
+            <div id="analytics-chart-container">
+                <canvas id="analytics-chart"></canvas>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Predictive Maintenance Dashboard</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize analytics chart (using Chart.js for example)
+            const ctx = document.getElementById('analytics-chart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Machine 1', 'Machine 2'],
+                    datasets: [{
+                        label: 'Maintenance Hours',
+                        data: [5, 8],
+                        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'],
+                        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
